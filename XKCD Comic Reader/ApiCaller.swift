@@ -7,12 +7,7 @@
 
 import Foundation
 
-protocol ApiCallerProtocol {
-    func fetch(url: String) async
-    func parse()
-}
-
-final class ApiCaller: ApiCallerProtocol {
+final class ApiCaller {
     // TODO: Calls  the api https://xkcd.com/info.0.json to get the info about the (latest) comic
     
     init() {}
@@ -29,7 +24,8 @@ final class ApiCaller: ApiCallerProtocol {
             if let httpResponse = httpResponse {
                 if httpResponse.statusCode == 200 {
                     print("Fetched!")
-                    print(data)
+                    let decodedData = parse(data)
+                    print(decodedData)
                 }
             }
         } catch {
@@ -38,8 +34,12 @@ final class ApiCaller: ApiCallerProtocol {
         
     }
     
-    func parse() {
-        print("Hello from parse()")
+    func parse(_ data: Data) -> XKCDData {
+        do {
+            return try JSONDecoder().decode(XKCDData.self, from: data)
+        } catch {
+            print(error)
+            return XKCDData()
+        }
     }
 }
-
