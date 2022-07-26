@@ -8,10 +8,15 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    let apiCaller = ApiCaller()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        Task.init {
+            await apiCaller.fetch(url: "https://xkcd.com/info.0.json")
+        }
     }
 
 
