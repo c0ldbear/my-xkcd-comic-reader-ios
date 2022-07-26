@@ -19,7 +19,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         Task.init {
-            let (xkcdData, comicImgData) = await viewModel.fetchComic()
+            let (xkcdData, comicImgData) = await viewModel.fetchXKCD()
             titleLabel.text = xkcdData?.title
             altTextLabel.text = xkcdData?.alt
             comicImageView.image = UIImage(data: comicImgData!)

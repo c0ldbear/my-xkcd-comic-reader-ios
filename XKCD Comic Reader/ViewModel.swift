@@ -10,23 +10,17 @@ import Foundation
 final class ViewModel {
     let xkcdUrl = "https://xkcd.com/info.0.json"
     
-    var title: String?
-    var altText: String?
-    
     let apiCaller = ApiCaller()
     
-    init(title: String? = nil, altText: String? = nil) {
-        self.title = title
-        self.altText = altText
-    }
+    init() {}
     
-    func fetchComic() async -> (XKCDData?, Data?) {
+    func fetchXKCD() async -> (XKCDData?, Data?) {
         let xkcdData: XKCDData? = await apiCaller.fetch(url: self.xkcdUrl)
-        let imgData = await fetchComicImg(fromUrl: xkcdData?.img)
+        let imgData = await fetchImgXKCD(fromUrl: xkcdData?.img)
         return (xkcdData, imgData)
     }
     
-    private func fetchComicImg(fromUrl imgUrl: String?) async -> Data? {
+    private func fetchImgXKCD(fromUrl imgUrl: String?) async -> Data? {
         guard let imgUrl = imgUrl,
               let url = URL(string: imgUrl) else {
             return nil
