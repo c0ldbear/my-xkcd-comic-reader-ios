@@ -12,9 +12,10 @@ final class ApiCaller {
     
     init() {}
     
-    func fetch(url: String) async {
+    func fetch<T: Codable>(url: String) async -> T? {
+        
         guard let url = URL(string: url) else {
-            return
+            return nil
         }
         
         do {
@@ -22,8 +23,7 @@ final class ApiCaller {
             let httpResponse = response as? HTTPURLResponse
             if let httpResponse = httpResponse {
                 if httpResponse.statusCode == 200 {
-                    let decodedData = parse(data)
-                    print(">> Decoded data: \(decodedData)")
+                    return parse(data)
                 } else {
                     print(">> HTTP Response Status Code: \(httpResponse.statusCode)")
                     print(">> HTTP Response: \(httpResponse)")
@@ -33,14 +33,15 @@ final class ApiCaller {
             print(error)
         }
         
+        return nil
     }
     
-    func parse(_ data: Data) -> XKCDData {
+    func parse<T: Codable>(_ data: Data) -> T? {
         do {
-            return try JSONDecoder().decode(XKCDData.self, from: data)
+            return try JSONDecoder().decode(T.self, from: data)
         } catch {
             print(error)
-            return XKCDData()
+            return nil
         }
     }
 }
