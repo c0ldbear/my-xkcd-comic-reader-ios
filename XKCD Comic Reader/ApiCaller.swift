@@ -13,7 +13,6 @@ final class ApiCaller {
     init() {}
     
     func fetch(url: String) async {
-        print("Hello from fetch()")
         guard let url = URL(string: url) else {
             return
         }
@@ -23,9 +22,11 @@ final class ApiCaller {
             let httpResponse = response as? HTTPURLResponse
             if let httpResponse = httpResponse {
                 if httpResponse.statusCode == 200 {
-                    print("Fetched!")
                     let decodedData = parse(data)
-                    print(decodedData)
+                    print(">> Decoded data: \(decodedData)")
+                } else {
+                    print(">> HTTP Response Status Code: \(httpResponse.statusCode)")
+                    print(">> HTTP Response: \(httpResponse)")
                 }
             }
         } catch {
