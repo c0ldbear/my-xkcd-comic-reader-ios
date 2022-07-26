@@ -9,13 +9,20 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    let apiCaller = ApiCaller()
-
+    @IBOutlet private var titleLabel: UILabel!
+    @IBOutlet private var altTextLabel: UILabel!
+    @IBOutlet private var comicImageView: UIImageView!
+    
+    let viewModel = ViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         Task.init {
-            await apiCaller.fetch(url: "https://xkcd.com/info.0.json")
+            let (xkcdData, comicImgData) = await viewModel.fetchXKCD()
+            titleLabel.text = xkcdData?.title
+            altTextLabel.text = xkcdData?.alt
+            comicImageView.image = UIImage(data: comicImgData!)
         }
     }
 
