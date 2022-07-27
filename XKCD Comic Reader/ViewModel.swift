@@ -8,21 +8,25 @@
 import Foundation
 
 final class ViewModel {
-    let xkcdUrl = "https://xkcd.com/info.0.json"
+    
+    var xkcdUrl = UrlXKCD()
     
     let apiCaller = ApiCaller()
     
     init() {}
     
-    func fetchXKCD() async -> (XKCDData?, Data?) {
-        let xkcdData: XKCDData? = await apiCaller.fetch(url: self.xkcdUrl)
+    func fetchXKCD(for number: Int? = nil) async -> (XKCDData?, Data?) {
+        if let comicNumber = number {
+            xkcdUrl.setComicNumber(comicNumber)
+        }
+        let xkcdData: XKCDData? = await apiCaller.fetch(url: xkcdUrl.get())
         guard let imgUrlString = xkcdData?.img else {
             return (nil, nil)
         }
+        // TODO: How do we keep track of the latest comic number? Save somewhere? and if so, how? or do we accept that the app will always display the latest comic first?
         
         let imgData: Data? = await apiCaller.fetch(url: imgUrlString)
         
         return (xkcdData, imgData)
     }
-    
 }
