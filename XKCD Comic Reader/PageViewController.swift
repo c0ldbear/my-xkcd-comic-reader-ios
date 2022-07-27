@@ -47,8 +47,8 @@ extension PageViewController: UIPageViewControllerDataSource, UIPageViewControll
             return nil
         }
         // Infinite loop
-        //        let previousIndex = abs((currentIndex + 1) % pages.count)
-        //        return pages[previousIndex]
+        //        let nextIndex = abs((currentIndex + 1) % pages.count)
+        //        return pages[nextIndex]
         return currentIndex < pages.count-1 ? pages[currentIndex + 1] : nil
     }
 
