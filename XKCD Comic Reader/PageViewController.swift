@@ -20,7 +20,7 @@ final class PageViewController: UIPageViewController {
         let page1: UIViewController! = storyboard?.instantiateViewController(withIdentifier: "ComicView")
         let page2: UIViewController! = storyboard?.instantiateViewController(withIdentifier: "ComicView")
         let page3: UIViewController! = storyboard?.instantiateViewController(withIdentifier: "ComicView")
-        
+
         pages.append(page1)
         pages.append(page2)
         pages.append(page3)
@@ -30,28 +30,32 @@ final class PageViewController: UIPageViewController {
    
 }
 
-extension PageViewController: UIPageViewControllerDataSource {
-    
+extension PageViewController: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
+
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         guard let currentIndex = pages.firstIndex(of: viewController) else {
             return nil
         }
-        let previousIndex = abs((currentIndex - 1) % pages.count)
-        return pages[previousIndex]
+        // Infinite loop
+        //        let previousIndex = abs((currentIndex - 1) % pages.count)
+        //        return pages[previousIndex]
+        return currentIndex > 0 ? pages[currentIndex - 1] : nil
     }
-    
+
     func pageViewController(_: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         guard let currentIndex = pages.firstIndex(of: viewController) else {
             return nil
         }
-        let previousIndex = abs((currentIndex + 1) % pages.count)
-        return pages[previousIndex]
+        // Infinite loop
+        //        let previousIndex = abs((currentIndex + 1) % pages.count)
+        //        return pages[previousIndex]
+        return currentIndex < pages.count-1 ? pages[currentIndex + 1] : nil
     }
-    
+
     func presentationCountForPageViewController(pageViewController: UIPageViewController) -> Int {
         return pages.count
     }
-    
+
     func presentationIndexForPageViewController(pageViewController: UIPageViewController) -> Int {
         return 0
     }
