@@ -12,11 +12,8 @@ struct UrlXKCD {
     private var xkcdUrl = "https://xkcd.com/"
     private(set) var xkcdNumber: Int = -1
     
-    func get(_ latest: Bool = true, for number: Int = -1) -> String {
-        if latest {
-            return xkcdUrl + xkcdEnd
-        }
-        return xkcdUrl + "/" + String(xkcdNumber) + "/" + xkcdEnd
+    func get() -> String {
+        return xkcdUrl + (xkcdNumber < 0 ? "" : String(xkcdNumber) + "/") + xkcdEnd
     }
     
     mutating func setComicNumber(_ number: Int?) {
