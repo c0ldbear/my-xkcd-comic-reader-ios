@@ -7,20 +7,8 @@
 
 import Foundation
 
-struct UrlXKCD {
-    private var xkcdEnd = "info.0.json"
-    private var xkcdUrl = "https://xkcd.com/"
-    private(set) var xkcdNumber: Int = -1
-    
-    func get() -> String {
-        return xkcdUrl + (xkcdNumber < 0 ? "" : String(xkcdNumber) + "/") + xkcdEnd
-    }
-    
-    mutating func setComicNumber(_ number: Int?) {
-        guard let number = number else {
-            xkcdNumber = -1
-            return
-        }
-        xkcdNumber = number
+extension URL {
+    init?(number: Int = -1) {
+        self.init(string: "https://xkcd.com/" + (number < 0 ? "" : "\(number)/") + "info.0.json")
     }
 }
