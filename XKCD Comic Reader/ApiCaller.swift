@@ -23,6 +23,9 @@ final class ApiCaller {
             let httpResponse = response as? HTTPURLResponse
             if let httpResponse = httpResponse {
                 if httpResponse.statusCode == 200 {
+                    if let data = data as? T {
+                        return data
+                    }
                     return parse(data)
                 } else {
                     print(">> HTTP Response Status Code: \(httpResponse.statusCode)")

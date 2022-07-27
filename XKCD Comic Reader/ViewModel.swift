@@ -16,7 +16,8 @@ final class ViewModel {
     
     func fetchXKCD() async -> (XKCDData?, Data?) {
         let xkcdData: XKCDData? = await apiCaller.fetch(url: self.xkcdUrl)
-        let imgData = await fetchImgXKCD(fromUrl: xkcdData?.img)
+//        let imgData = await fetchImgXKCD(fromUrl: xkcdData?.img)
+        let imgData: Data? = await apiCaller.fetch(url: xkcdData?.img as! String)
         return (xkcdData, imgData)
     }
     
