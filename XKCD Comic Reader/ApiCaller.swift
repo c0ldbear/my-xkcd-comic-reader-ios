@@ -12,9 +12,9 @@ final class ApiCaller {
     
     init() {}
     
-    func fetch<T: Codable>(url: String) async -> T? {
+    func fetch<T: Codable>(url: URL?) async -> T? {
         
-        guard let url = URL(string: url) else {
+        guard let url = url else {
             return nil
         }
         
