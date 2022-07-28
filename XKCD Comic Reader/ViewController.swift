@@ -16,7 +16,7 @@ class ViewController: UIViewController {
     let viewModel = ViewModel()
     var comicNumber: Int = -1 {
         didSet {
-            viewModel.nextNumber = comicNumber - 1
+            viewModel.nextNumber = comicNumber
         }
     }
     
@@ -31,7 +31,7 @@ class ViewController: UIViewController {
                 return
             }
             
-            titleLabel.text = xkcdData.title
+            titleLabel.text = "\(xkcdData.title!) (\(xkcdData.num!))"
             altTextLabel.text = xkcdData.alt
             comicNumber = xkcdData.num ?? -1
             comicImageView.image = UIImage(data: comicImgData)
