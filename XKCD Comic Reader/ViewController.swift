@@ -13,6 +13,8 @@ class ViewController: UIViewController {
     @IBOutlet private var altTextLabel: UILabel!
     @IBOutlet private var comicImageView: UIImageView!
     
+    var activityIndicator = UIActivityIndicatorView(style: .large)
+    
     let viewModel = ViewModel()
     var comicNumber: Int = -1 {
         didSet {
@@ -23,6 +25,16 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        view.addSubview(activityIndicator)
+        
+        setupActivityIndicator()
+        
+        activityIndicator.startAnimating()
+        
+        titleLabel.text = ""
+        altTextLabel.text = ""
+        
         Task.init {
             let (xkcdData, comicImgData) = await viewModel.fetchXKCD()
             
@@ -35,7 +47,19 @@ class ViewController: UIViewController {
             altTextLabel.text = xkcdData.alt
             comicNumber = xkcdData.num ?? -1
             comicImageView.image = UIImage(data: comicImgData)
+            
+            activityIndicator.stopAnimating()
         }
+    }
+    
+    func setupActivityIndicator() {
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        
+        let horizontalConstraint = NSLayoutConstraint(item: activityIndicator, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0)
+        view.addConstraint(horizontalConstraint)
+        
+        let verticalConstraint = NSLayoutConstraint(item: activityIndicator, attribute: .centerY, relatedBy: .equal, toItem: view, attribute: .centerY, multiplier: 1, constant: 0)
+        view.addConstraint(verticalConstraint)
     }
 }
 
