@@ -32,6 +32,7 @@ class ViewController: UIViewController {
         
         setupActivityIndicator()
         
+        comicImageView.isHidden = true
         activityIndicator.startAnimating()
         
         Task.init {
@@ -46,8 +47,10 @@ class ViewController: UIViewController {
             altTextLabel.text = xkcdData.alt
             comicNumber = xkcdData.num ?? -1
             comicImageView.image = UIImage(data: comicImgData)
+            setEqualSizeOnImage(forImageView: comicImageView)
             
             activityIndicator.stopAnimating()
+            comicImageView.isHidden = false
         }
     }
     
@@ -59,6 +62,14 @@ class ViewController: UIViewController {
         
         let verticalConstraint = NSLayoutConstraint(item: activityIndicator, attribute: .centerY, relatedBy: .equal, toItem: view, attribute: .centerY, multiplier: 1, constant: 0)
         view.addConstraint(verticalConstraint)
+    }
+    
+    func setEqualSizeOnImage(forImageView imageView: UIImageView?) {
+        guard let imageView = imageView,
+              let image = imageView.image else {
+            return
+        }
+        imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor, multiplier: image.size.width / image.size.height).isActive = true
     }
 }
 
