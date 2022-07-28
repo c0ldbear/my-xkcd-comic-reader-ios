@@ -17,11 +17,8 @@ final class PageViewController: UIPageViewController {
         
         dataSource = self
         
-        var page: UIViewController! = storyboard?.instantiateViewController(withIdentifier: "ComicView")
-        pages.append(page)
-        
-        for _ in 0...10 {
-            page = storyboard?.instantiateViewController(withIdentifier: "ComicView")
+        for _ in 0...1 {
+            let page: UIViewController! = storyboard?.instantiateViewController(withIdentifier: "ComicView")
             pages.append(page)
         }
         
@@ -52,8 +49,14 @@ extension PageViewController: UIPageViewControllerDataSource, UIPageViewControll
         // Infinite loop
         //        let nextIndex = abs((currentIndex + 1) % pages.count)
         //        return pages[nextIndex]
+        
+        if (currentIndex + 1) >= pages.count {
+            let page: UIViewController! = storyboard?.instantiateViewController(withIdentifier: "ComicView")
+            self.pages.append(page)
+        }
+        
         guard let currentView = pages[currentIndex] as? ViewController,
-              let nextView = (currentIndex < pages.count-1 ? pages[currentIndex + 1] : nil) as? ViewController else {
+              let nextView = pages[currentIndex + 1] as? ViewController else {
             return nil
         }
         nextView.comicNumber = currentView.comicNumber - 1
