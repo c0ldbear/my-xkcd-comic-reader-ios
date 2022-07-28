@@ -17,15 +17,15 @@ final class PageViewController: UIPageViewController {
         
         dataSource = self
         
-        let page1: UIViewController! = storyboard?.instantiateViewController(withIdentifier: "ComicView")
-        let page2: UIViewController! = storyboard?.instantiateViewController(withIdentifier: "ComicView")
-        let page3: UIViewController! = storyboard?.instantiateViewController(withIdentifier: "ComicView")
-
-        pages.append(page1)
-        pages.append(page2)
-        pages.append(page3)
+        var page: UIViewController! = storyboard?.instantiateViewController(withIdentifier: "ComicView")
+        pages.append(page)
         
-        setViewControllers([page1], direction: .forward, animated: false)
+        for _ in 0...10 {
+            page = storyboard?.instantiateViewController(withIdentifier: "ComicView")
+            pages.append(page)
+        }
+        
+        setViewControllers([pages[0]], direction: .forward, animated: false)
     }
    
 }
@@ -39,7 +39,10 @@ extension PageViewController: UIPageViewControllerDataSource, UIPageViewControll
         // Infinite loop
         //        let previousIndex = abs((currentIndex - 1) % pages.count)
         //        return pages[previousIndex]
-        return currentIndex > 0 ? pages[currentIndex - 1] : nil
+        guard let previousView = (currentIndex > 0 ? pages[currentIndex - 1] : nil) else {
+            return nil
+        }
+        return previousView
     }
 
     func pageViewController(_: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
@@ -49,7 +52,12 @@ extension PageViewController: UIPageViewControllerDataSource, UIPageViewControll
         // Infinite loop
         //        let nextIndex = abs((currentIndex + 1) % pages.count)
         //        return pages[nextIndex]
-        return currentIndex < pages.count-1 ? pages[currentIndex + 1] : nil
+        guard let currentView = pages[currentIndex] as? ViewController,
+              let nextView = (currentIndex < pages.count-1 ? pages[currentIndex + 1] : nil) as? ViewController else {
+            return nil
+        }
+        nextView.comicNumber = currentView.comicNumber - 1
+        return nextView
     }
 
     func presentationCountForPageViewController(pageViewController: UIPageViewController) -> Int {
