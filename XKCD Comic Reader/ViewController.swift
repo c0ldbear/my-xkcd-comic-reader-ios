@@ -13,9 +13,9 @@ class ViewController: UIViewController {
     @IBOutlet private var altTextLabel: UILabel!
     @IBOutlet private var comicImageView: UIImageView!
     
-    var activityIndicator = UIActivityIndicatorView(style: .large)
-    
+    let activityIndicator = UIActivityIndicatorView(style: .large)
     let viewModel = ViewModel()
+    
     var comicNumber: Int = -1 {
         didSet {
             viewModel.nextNumber = comicNumber
@@ -24,16 +24,15 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        titleLabel.text = ""
+        altTextLabel.text = ""
         
         view.addSubview(activityIndicator)
         
         setupActivityIndicator()
         
         activityIndicator.startAnimating()
-        
-        titleLabel.text = ""
-        altTextLabel.text = ""
         
         Task.init {
             let (xkcdData, comicImgData) = await viewModel.fetchXKCD()
