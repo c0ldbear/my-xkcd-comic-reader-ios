@@ -13,6 +13,11 @@
 		139A67EC288FE58B003B8D07 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 139A67EA288FE58B003B8D07 /* Main.storyboard */; };
 		139A67EE288FE58C003B8D07 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 139A67ED288FE58C003B8D07 /* Assets.xcassets */; };
 		139A67F1288FE58C003B8D07 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 139A67EF288FE58C003B8D07 /* LaunchScreen.storyboard */; };
+		139A67F9288FECC0003B8D07 /* ApiCaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139A67F8288FECC0003B8D07 /* ApiCaller.swift */; };
+		139A67FB28901018003B8D07 /* XKCDData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139A67FA28901018003B8D07 /* XKCDData.swift */; };
+		139A67FD28901B5F003B8D07 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139A67FC28901B5F003B8D07 /* ViewModel.swift */; };
+		139A67FF28912FFE003B8D07 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139A67FE28912FFE003B8D07 /* PageViewController.swift */; };
+		139A680128914189003B8D07 /* UrlXKCD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139A680028914189003B8D07 /* UrlXKCD.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +29,11 @@
 		139A67ED288FE58C003B8D07 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		139A67F0288FE58C003B8D07 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		139A67F2288FE58C003B8D07 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		139A67F8288FECC0003B8D07 /* ApiCaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiCaller.swift; sourceTree = "<group>"; };
+		139A67FA28901018003B8D07 /* XKCDData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XKCDData.swift; sourceTree = "<group>"; };
+		139A67FC28901B5F003B8D07 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		139A67FE28912FFE003B8D07 /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
+		139A680028914189003B8D07 /* UrlXKCD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlXKCD.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,7 +69,12 @@
 				139A67E4288FE58B003B8D07 /* AppDelegate.swift */,
 				139A67E6288FE58B003B8D07 /* SceneDelegate.swift */,
 				139A67E8288FE58B003B8D07 /* ViewController.swift */,
+				139A67FC28901B5F003B8D07 /* ViewModel.swift */,
+				139A680028914189003B8D07 /* UrlXKCD.swift */,
+				139A67FA28901018003B8D07 /* XKCDData.swift */,
 				139A67EA288FE58B003B8D07 /* Main.storyboard */,
+				139A67FE28912FFE003B8D07 /* PageViewController.swift */,
+				139A67F8288FECC0003B8D07 /* ApiCaller.swift */,
 				139A67ED288FE58C003B8D07 /* Assets.xcassets */,
 				139A67EF288FE58C003B8D07 /* LaunchScreen.storyboard */,
 				139A67F2288FE58C003B8D07 /* Info.plist */,
@@ -139,8 +154,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				139A67E9288FE58B003B8D07 /* ViewController.swift in Sources */,
+				139A67FF28912FFE003B8D07 /* PageViewController.swift in Sources */,
 				139A67E5288FE58B003B8D07 /* AppDelegate.swift in Sources */,
 				139A67E7288FE58B003B8D07 /* SceneDelegate.swift in Sources */,
+				139A67F9288FECC0003B8D07 /* ApiCaller.swift in Sources */,
+				139A680128914189003B8D07 /* UrlXKCD.swift in Sources */,
+				139A67FD28901B5F003B8D07 /* ViewModel.swift in Sources */,
+				139A67FB28901018003B8D07 /* XKCDData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,6 +307,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 77882PL387;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "XKCD Comic Reader/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -314,6 +335,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 77882PL387;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "XKCD Comic Reader/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
